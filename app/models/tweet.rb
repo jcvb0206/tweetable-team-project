@@ -7,4 +7,14 @@ class Tweet < ApplicationRecord
 
   has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy,
                      inverse_of: :optional
+
+  validates :body, presence: true,
+                   length: {
+                     maximum: 140,
+                     message: 'Description length should be at most 140 characters long'
+                   }
+
+  def user_attached?
+    user.avatar.attached?
+  end          
 end
