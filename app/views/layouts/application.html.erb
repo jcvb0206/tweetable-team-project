@@ -8,6 +8,24 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= yield %>
+
+    <header class='header-page'>
+      <%# <h2>Logo</h2> %>
+      <%= image_tag("Tweetable.png")%>
+      <div class='header-page__actions'>
+        <% if current_user %>
+        <p>Logged as, <%= link_to current_user.username, edit_user_registration_path(current_user )%> </p>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        <% else %>
+        <%= link_to "Sign In", new_user_session_path %>
+        <% end %>
+      </div>
+    </header>
+
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
   </body>
 </html>
