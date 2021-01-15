@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-
   def index
     @tweets = Tweet.all
     @tweet = Tweet.new
@@ -20,8 +19,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 

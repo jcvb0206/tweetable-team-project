@@ -16,5 +16,5 @@ class Tweet < ApplicationRecord
 
   def user_attached?
     user.avatar.attached?
-  end          
+  end
 end
