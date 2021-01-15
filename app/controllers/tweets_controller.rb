@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: %i[edit update destroy]
 
   def index
     @tweets = Tweet.all
@@ -7,7 +8,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
-    @comment = @tweet.comments.new
+    @tweets = @tweet.replies
   end
 
   def create
@@ -20,13 +21,27 @@ class TweetsController < ApplicationController
     end
   end
 
+  #def edit; end
+
+  def update
+
+    if @tweet.update(tweet_params)
+      redirect_to root_path
+    else
+      render :edit, notice: @tweet.errors.full_messages.join(', ')
+    end
+  end
+
   def destroy
+    
+    @tweet.destroy
+    redirect_to root_path
   end
 
   private
 
   def tweet_params
-    params.require(:tweet).permit(:body, :username, :name)
+    params.require(:tweet).permit(:body, :username, :name, :replies_count, :likes_count, :parent_id)
   end
 
   def set_tweet
