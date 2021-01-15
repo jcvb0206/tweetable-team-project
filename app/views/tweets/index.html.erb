@@ -1,39 +1,55 @@
 <h1>Home</h1>
 
-<% if current_user %>
-<div >
-  <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
+<section class='content-index'>
 
-  <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
-    <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write %>
-    <%= f.submit "Submit",{class: :button} %>
-  <% end %>
-</div>
-<% end %>
-
-<% @tweets.each do |tweet| %>
-<div >
-  <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png'), class: :image %>
-  <div >
-    <div >
-      <h2 ><%= tweet.user.name %></h2>
-      <span >@<%= tweet.user.username %></span>
-      <span >@<%= tweet.created_at %></span>
+  <div class="card-full">
+    <% if current_user %>
+    <div class="card-full__image" >
+      <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
     </div>
-    <p ><%= tweet.body %></p>
-    <div >
-      <% if current_user && current_user.id == tweet.user_id %>
-      <div>
-        <%= link_to edit_tweet_path(tweet) do %>
-          <%= image_tag 'edit.png', class: :ico %>
-        <% end %>
-
-        <%= link_to tweet_path(tweet), method: :delete, data: { confirm: 'Are you sure you want to delete' } do %>
-          <%= image_tag 'delete.png', class: :ico %>
-        <% end %>
-      </div>
+    <div class="card-full__body">
+      <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
+        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write %>
+        <div class="card-full__button">
+        <%# <%= f.submit "Tweet",{class: :card_button} %> 
+        <%= f.submit "Tweet" %> 
+        </div>
       <% end %>
     </div>
+    <% end %>
   </div>
-</div>
-<% end %>
+
+  <% @tweets.each do |tweet| %>
+    <%# <%= link_to tweet_path(tweet),class: 'card-full' do%> 
+    <div class="card-full">
+      <div class='card-full__image'>
+        <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>
+      </div>
+
+      <div class='card-full__body'>
+        <div >
+          <%# <h2 class='card-title'><%= tweet.user.name %></h2> 
+          
+          <%= link_to tweet.user.name, tweet_path(tweet), class: "card-name" %>          
+          <span >@<%= tweet.user.username %></span>
+          <small class='card-release'>@<%= tweet.created_at.day.ordinalize %></small>
+        </div>
+        <p ><%= tweet.body %></p>
+        <div >
+          <% if current_user && current_user.id == tweet.user_id %>
+          <div class="card-icons">
+            <%= link_to edit_tweet_path(tweet) do %>
+              <%= image_tag 'edit.png', class: :ico %>
+            <% end %>
+
+            <%= link_to tweet_path(tweet), method: :delete, data: { confirm: 'Are you sure you want to delete' } do %>
+              <%= image_tag 'delete.png', class: :ico %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+  <% end %>
+</section>
