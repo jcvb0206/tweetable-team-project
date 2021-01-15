@@ -15,17 +15,22 @@
         <%= image_tag("Tweetable.png")%>
       </div>
 
-      <div class="options">
+      <div   class="options">
         <h2>Home</h2>
         <h2>Profile</h2>
+        <%= link_to root_path do %>
+        <%= image_tag('logo.png')%>
+      <% end %>
       </div>
+
+      
 
       <div class='header-page__actions'>
         <% if current_user %>
           <%= link_to current_user.username, edit_user_registration_path(current_user )%>
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to "Sign In", new_user_session_path %>
+          <%= link_to "Log in", new_user_session_path %>
         <% end %>
       </div>
     </header>
