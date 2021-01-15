@@ -1,0 +1,4 @@
+<%= form_with model: @tweet, local: true, class: 'form_inside' do |f| %>
+  <%= f.text_area :body, class: 'text_area', placeholder: 'Remember to think before write' %>
+  <%= f.submit "Submit", class: 'button' %>
+<% end %>
