@@ -88,7 +88,7 @@
   grid-template-rows: 1fr;
 }
 
-.header-container {
+.header-container, .form-container {
   background-color: var(--white-color);
   border: 1px solid var(--border-box-color);
 }
@@ -123,3 +123,24 @@
   content: url(profile.png);
 }
 
+.form-container{
+  width: 100%;
+  padding: 8px;
+}
+
+.form-container form {
+  width: 260px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-container .field {
+  margin-bottom: 8px;
+}
+
+.form-container a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
