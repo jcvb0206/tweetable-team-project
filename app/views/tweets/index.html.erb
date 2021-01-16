@@ -1,51 +1,34 @@
-<h1>Home</h1>
-
-<section class='content-index'>
-
-  <div class="card-full">
-    <% if current_user %>
-    <div class="card-full__image" >
-      <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
-    </div>
-    <div class="card-full__body">
-      <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
-        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write %>
-        <div class="card-full__button">
-        <%# <%= f.submit "Tweet",{class: :card_button} %> 
-        <%= f.submit "Tweet" %> 
-        </div>
-      <% end %>
-    </div>
-    <% end %>
+<section class='index-container'>
+  <div class="title">
+    <h1>Home</h1>
   </div>
-
+  <% if current_user %>
+    <div class="primary-card">
+      <%= render 'form' %>
+    </div>
+  <% end %>
   <% @tweets.each do |tweet| %>
-
     <div class="card-full">
       <div class='card-full__image'>
         <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>
       </div>
-
       <div class='card-full__body'>
-        <div >          
-          <%= link_to tweet.user.name, tweet_path(tweet), class: "card-name" %>          
-          <span >@<%= tweet.user.username %></span>
-          <small class='card-release'>@<%= tweet.created_at.day.ordinalize %></small>
+        <div class='card-full__info'>          
+          <%= link_to tweet.user.name, tweet_path(tweet) %>          
+          <span>@<%= tweet.user.username %></span>
+          <small><%= time_ago_in_words(tweet.created_at) %></small>
         </div>
-          <p ><%= tweet.body %></p>
-        
-        <div  class="card-icons" >
+        <p><%= tweet.body %></p>
+        <div class="card-icons" >
           <div class="card-icons-left">
-               <%= link_to tweet_path(tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %>
-              <% end %>
-              <%= link_to (tweet) do %>
-                <%= image_tag 'unlike.png', class: :ico %>
-              <% end %>
-              
+            <%= link_to tweet_path(tweet) do %>
+              <%= image_tag 'reply.png', class: :ico %>
+            <% end %>
+            <%= link_to (tweet) do %>
+              <%= image_tag 'unlike.png', class: :ico %>
+            <% end %>
           </div>
-
-          <% if current_user && current_user.id == tweet.user_id %>
+        <% if current_user && current_user.id == tweet.user_id %>
           <div class="card-icons-right">
             <%= link_to edit_tweet_path(tweet) do %>
               <%= image_tag 'edit.png', class: :ico %>
@@ -54,7 +37,7 @@
               <%= image_tag 'delete.png', class: :ico %>
             <% end %>
           </div>
-          <% end %>
+        <% end %>
         </div>
       </div>
     </div>
