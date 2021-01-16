@@ -30,7 +30,7 @@
   </div>
 
   <% if current_user %>
-  <%= form_with(url: tweet_reply_path(@tweet), method: :post, local: true, class: :form_inside) do |f| %>
+  <%= form_with(url: tweet_reply_path(@tweet), method: :post, local: true, class: 'card-full') do |f| %>
   <% if @tweet.errors.any? %>
   <div>
     <ul>
