@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tweets, only: %i[create edit update show destroy]
 
   resources :tweets, only: %i[create edit update show destroy] do
-    resources :reply_tweets, only: %i[create]
+    post '/reply', to: 'tweets#create_reply'
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }

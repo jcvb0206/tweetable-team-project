@@ -22,13 +22,15 @@ class TweetsController < ApplicationController
   end
 
   def create_reply
-    @tweet = Tweet.find(params[:id])
-    @tweets = Tweet.all
-    @tweet = current_user.tweets.create(tweet_params)
-    if @tweet.save
-      redirect_to root_path
+    @tweet = Tweet.find(params[:tweet_id])
+    @tweet_reply = @tweet.replies.new
+    @tweet_reply.body = params[:body]
+    @tweet_reply.user_id = current_user.id
+
+    if @tweet_reply.save
+      redirect_to @tweet
     else
-      redirect_to root_path, notice: @tweet.errors.full_messages.join(', ')
+      redirect_to @tweet, notice: @tweet_reply.errors.full_messages.join(', ')
     end
   end
 

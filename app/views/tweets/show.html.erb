@@ -1,6 +1,7 @@
   <div class="title">
     <h1>Tweet Detail</h1>
   </div>
+
   <div class="primary-card">
     <div class="card-full">
       <div class='card-full__image'>
@@ -28,7 +29,27 @@
     </div>
   </div>
 
-  <%= render 'form' %>
+  <% if current_user %>
+  <%= form_with(url: tweet_reply_path(@tweet), method: :post, local: true, class: 'card-full') do |f| %>
+  <% if @tweet.errors.any? %>
+  <div>
+    <ul>
+      <% @tweet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="card-full__image">
+    <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png') %>
+  </div>
+  <div class="card-full__body">
+    <%= f.text_field :body, placeholder: "Remember to think before write", class: 'form-input' %>
+    <%= f.submit 'Tweet', class: 'primary-button form-button' %>
+  </div>
+<% end %>
+  <% end %>
+
   
   <% @tweet.replies.each do |reply| %>
     <%= render partial: "tweet_card", locals: { tweet: reply } %>
