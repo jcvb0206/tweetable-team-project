@@ -1,26 +1,27 @@
-<h1>Home</h1>
+<h1>Profile</h1>
 
 <section class='content-index'>
 
-  <div class="card-full">
-    <% if current_user %>
+  <div class="card-profile">
+    
     <div class="card-full__image" >
-      <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
+      <%= image_tag (@user.avatar.attached? ? @user.avatar : 'user.png'), class: :image %>
     </div>
-    <div class="card-full__body">
-      <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
-        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write... %>
-        <div class="card-full__button">
-        <%# <%= f.submit "Tweet",{class: :card_button} %> 
-        <%= f.submit "Tweet" %> 
-        </div>
-      <% end %>
-    </div>
+    <span ><%= @user.name %></span>
+    <span >@<%= @user.username %></span>
+    <small class='card-release'>Joined on <%= @user.created_at.year %></small>
+
+    <% if current_user && current_user.id == @user.id%>
+    <%= link_to "Edit Profile" ,edit_user_registration_path(current_user) %>
     <% end %>
   </div>
 
-  <% @tweets.each do |tweet| %>
   
+
+
+
+  <% @user.tweets.each do |tweet| %>
+
     <div class="card-full">
 
       <div class='card-full__image'>
@@ -32,7 +33,7 @@
 
       <div class='card-full__body'>
         <div >          
-          <span ><%= tweet.user.name.capitalize %></span>         
+          <%= link_to tweet.user.name, tweet_path(tweet), class: "card-name" %>          
           <span >@<%= tweet.user.username %></span>
           <small class='card-release'>@<%= tweet.created_at.day.ordinalize %></small>
         </div>
@@ -41,7 +42,7 @@
         <div  class="card-icons" >
           <div class="card-icons-left">
                <%= link_to tweet_path(tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %><p>
+                <%= image_tag 'reply.png', class: :ico %>
                 <span><%= tweet.replies.count %></span>
               <% end %>
               <%= link_to (tweet) do %>

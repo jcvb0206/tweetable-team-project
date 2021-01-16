@@ -16,20 +16,6 @@ class Tweet < ApplicationRecord
                      message: 'Description length should be at most 140 characters long'
                    }
 
-  after_create :increment_counter_tweets
-  after_destroy :decrement_counter_tweets
-
-  def increment_counter_tweets
-    pp "incrementandoooooooooooooooooo"
-    self.increment(:tweets_count)
-    self.save
-  end
-
-  def decrement_counter_tweets
-    self.decrement(:tweets_count)
-    self.save
-  end
-
   def user_attached?
     user.avatar.attached?
   end

@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[edit update destroy]
 
   def index
-    @tweets = Tweet.all.select { |tweet| tweet.parent_id == nil }
+    @tweets = Tweet.all.select { |tweet| tweet.parent_id.nil? }
     @tweet = Tweet.new
   end
 
@@ -21,7 +21,18 @@ class TweetsController < ApplicationController
     end
   end
 
-  #def edit; end
+  def create_reply
+    @tweet = Tweet.find(params[:id])
+    @tweets = Tweet.all
+    @tweet = current_user.tweets.create(tweet_params)
+    if @tweet.save
+      redirect_to root_path
+    else
+      redirect_to root_path, notice: @tweet.errors.full_messages.join(', ')
+    end
+  end
+
+  # def edit; end
 
   def update
     if @tweet.update(tweet_params)
