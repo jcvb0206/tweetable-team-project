@@ -4,9 +4,11 @@ class Tweet < ApplicationRecord
   has_many :users, through: :likes
 
   belongs_to :parent, class_name: 'Tweet', optional: true
-
-  has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy,
-                     inverse_of: :optional
+  # has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy
+  has_many :replies, class_name: 'Tweet', 
+                     foreign_key: 'parent_id', 
+                     dependent: :nullify,
+                     inverse_of: false
 
   validates :body, presence: true,
                    length: {

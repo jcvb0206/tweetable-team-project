@@ -1,0 +1,6 @@
+<p>show</p>
+
+<% @tweets.each do |tweet| %>
+  <span ><%= tweet.user.username %></span>
+  <span ><%= tweet.body %></span>
+<% end %>
