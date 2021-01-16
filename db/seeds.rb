@@ -23,10 +23,15 @@ u2 = User.create!({:name=>"leo",
  
 #t1 = Tweet.create(body: "haha i am u1")
 #t1.user_id = u1.id
-t1 = Tweet.create(body:"haha",user_id: u1.id)
-t2 = Tweet.create(body:"haha2",user_id: u2.id)
+t1 = Tweet.create(body:"Mi primer tweet de usuario 1",user_id: u1.id)
+t2 = Tweet.create(body:"Mi primer tweet de usuario 2",user_id: u2.id)
+t3 = Tweet.create(body:"Mi segundo tweet de usuario 1",user_id: u1.id)
+t4 = Tweet.create(body:"Mi segundo tweet de usuario 2",user_id: u2.id)
+t5 = Tweet.create(body:"Mi tercer tweet de usuario 2",user_id: u2.id)
 
 # rails db:reset -> rails db:seeds
 # sudo service postgresql start
 
 t1.replies << t2
+t4.replies << t2
+t5.replies << t2
