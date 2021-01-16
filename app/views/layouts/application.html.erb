@@ -16,21 +16,31 @@
       </div>
 
       <div   class="options">
-        <h2>Home</h2>
-        <h2>Profile</h2>
+      
+      <div>
+      <%= link_to root_path do %>
+      <h2>Home</h2>
+        <% end %>
         <%= link_to root_path do %>
         <%= image_tag('logo.png')%>
       <% end %>
+
+      </div>
+         <% if current_user %>
+         <%= link_to user_path(current_user) do %>
+        <h2>Profile</h2>
+         <% end %>
+        <% end %>
       </div>
 
       
 
       <div class='header-page__actions'>
         <% if current_user %>
-          <%= link_to current_user.username, edit_user_registration_path(current_user )%>
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Log in", new_user_session_path %>
+          
         <% end %>
       </div>
     </header>
