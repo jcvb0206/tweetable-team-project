@@ -12,9 +12,7 @@
     <small class='card-release'>Joined on <%= @user.created_at.year %></small>
 
     <% if current_user && current_user.id == @user.id%>
-    <%= link_to current_user.username ,edit_user_registration_path(current_user) %>
-     
-      
+    <%= link_to "Edit Profile" ,edit_user_registration_path(current_user) %>
     <% end %>
   </div>
 
