@@ -30,7 +30,7 @@ t4 = Tweet.create(body:"Mi segundo tweet de usuario 2",user_id: u2.id)
 t5 = Tweet.create(body:"Mi tercer tweet de usuario 2",user_id: u2.id)
 t6 = Tweet.create(body:"Mi tweet de usuario 2 sin parent_id",user_id: u2.id)
 # rails db:reset -> rails db:seeds
-# sudo service postgresql start
+# sudo service postgresql restart
 
 t1.replies << t3
 t1.replies << t4
