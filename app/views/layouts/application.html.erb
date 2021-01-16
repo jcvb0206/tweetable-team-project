@@ -7,48 +7,20 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="body">
-
-    <header class='header-page'>
-      <%# <h2>Logo</h2> %>
-      <div class="logo" >
-        <%= image_tag("Tweetable.png")%>
-      </div>
-
-      <div   class="options">
-      
-      <div>
-      <%= link_to root_path do %>
-      <h2>Home</h2>
-        <% end %>
-        <%= link_to root_path do %>
-        <%= image_tag('logo.png')%>
-      <% end %>
-
-      </div>
-         <% if current_user %>
-         <%= link_to user_path(current_user) do %>
-        <h2>Profile</h2>
-         <% end %>
+  <body class="app">
+    <% if notice || alert %>
+      <div class="pop_ups">
+        <p class="notice"><%= notice %></p>
+        <% if alert%>
+          <p class="alert"><%= alert %></p>
         <% end %>
       </div>
-
-      
-
-      <div class='header-page__actions'>
-        <% if current_user %>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "Log in", new_user_session_path %>
-          
-        <% end %>
-      </div>
-    </header>
-
+    <% end %>
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+      <%= render 'layouts/header'%>
+      <div class='content-container'>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

@@ -1,0 +1,35 @@
+<header class='header-container'>
+  <div class="header-logo" >
+    <%= image_tag("Tweetable.png") %>
+  </div>
+
+  <div class="header-body">
+    <nav class="header-options">
+      <div class="option-box">
+        <%= link_to root_path, class: 'home-option' do %>
+          <h2>Home</h2>
+        <% end %>
+      </div>
+      <% if current_user %>
+        <div class="option-box">
+          <%= link_to user_path(current_user), class: 'profile-option' do %>
+            <h2>Profile</h2>
+          <% end %>
+        </div>
+        <div class="option-box">
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'secondary-button' %>
+        </div>
+      <% else %>
+        <div class="option-box">
+          <%= link_to "Log in", new_user_session_path, class: 'secondary-button' %>
+        </div>
+        <div class="option-box">
+          <%= link_to "Sign in with Google", omniauth_authorize_path(:user, :google_oauth2), class: 'oauth-button' %>
+        </div>
+        <div class="option-box">
+          <%= link_to "Sign in with Github", omniauth_authorize_path(:user, :github), class: 'oauth-button' %>
+        </div>
+      <% end %>
+    </nav>
+  </div>
+</header>

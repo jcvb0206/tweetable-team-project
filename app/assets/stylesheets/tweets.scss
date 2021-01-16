@@ -1,3 +1,66 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.title {
+  padding: 16px;
+  background-color: var(--white-color);
+  text-align: center;
+  border: 1px solid var(--border-box-color);
+}
+
+.card-full {
+  display: flex;
+  padding: 8px 16px;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-box-color);
+}
+
+.card-full > .card-full__image {
+  margin-right: 8px;
+}
+
+.card-full__image img {
+  width: 50px;
+  height: 50px;
+  display: block;
+  border: 1px solid #f7f9fa;
+  border-radius: 50%; 
+}
+
+.card-full__body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-full__info > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.card-full__info > span , .card-full__info > small {
+  color: var(--secondary-text-color);
+}
+
+.card-full__body > .card-icons {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.primary-card {
+  margin-bottom: 12px;
+}
+
+.card-full__body > .form-input {
+  margin: 8px 0;
+  border: 0;
+}
+
+.card-full__body > .form-button {
+  margin-top: 8px;
+  margin-left: auto;
+}
+

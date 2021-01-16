@@ -1,84 +1,35 @@
-<h2>Tweet Detail</h2>
-
-<div class="card-full">
-<div class='card-full__body'>
-<div >
-          <span><%= @tweet.user.name.capitalize %></span>        
-          <span >@<%= @tweet.user.username %></span>
-          <small class='card-release'><%= @tweet.created_at.year%></small>
-        </div>
-          <p><%= @tweet.body %></p>
-        
-        <div  class="card-icons" >
-          <div class="card-icons-left">
-               <%= link_to tweet_path(@tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %>
-                <span><%= @tweet.replies.count %></span>
-              <% end %>
-              <%= link_to (@tweet) do %>
-                <%= image_tag 'unlike.png', class: :ico %>
-              <% end %>
-             </div> 
-          </div>
-           </div>
-           </div>
-
-
-<div class="card-full">
-    <% if current_user %>
-    <div class="card-full__image" >
-      <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
-    </div>
-    <div class="card-full__body">
-      <%= form_with model: @tweet, method: :post, to:'reply_tweets#create', local: true, html: {class: :form_inside} do |f| %>
-        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write... %>
-        <div class="card-full__button">
-        <%= f.submit "Tweet" %> 
-        </div>
-      <% end %>
-    </div>
-    <% end %>
+  <div class="title">
+    <h1>Tweet Detail</h1>
   </div>
-
-
-<section class='content-index'>
-
-  <% @tweets.each do |tweet| %>
-
+  <div class="primary-card">
     <div class="card-full">
-
+      <div class='card-full__image'>
+        <%= image_tag (@tweet.user.avatar.attached? ? @tweet.user.avatar : 'user.png') %>
+      </div>
       <div class='card-full__body'>
-        <div >
-          <span><%= tweet.user.name.capitalize %></span>        
-          <span >@<%= tweet.user.username %></span>
-          <small class='card-release'><%= tweet.created_at.year%></small>
+        <div>          
+          <%= link_to @tweet.user.name, tweet_path(@tweet), class: "card-name" %>          
+          <span>@<%= @tweet.user.username %></span>
+          <small class='card-release'><%= time_ago_in_words(@tweet.created_at) %></small>
         </div>
-          <p><%= tweet.body %></p>
-        
-        <div  class="card-icons" >
+        <p ><%= @tweet.body %></p>
+        <div class="card-icons" >
           <div class="card-icons-left">
-               <%= link_to tweet_path(tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %>
-                <span><%= tweet.replies.count %></span>
-              <% end %>
-              <%= link_to (tweet) do %>
-                <%= image_tag 'unlike.png', class: :ico %>
-              <% end %>
-              
-          </div>
-
-          <% if current_user && current_user.id == tweet.user_id %>
-          <div class="card-icons-right">
-            <%= link_to edit_tweet_path(tweet) do %>
-              <%= image_tag 'edit.png', class: :ico %>
+            <%= link_to tweet_path(@tweet) do %>
+              <%= image_tag 'reply.png', class: :ico %>
+              <span><%= @tweet.replies.count %></span>
             <% end %>
-            <%= link_to tweet_path(tweet), method: :delete, data: { confirm: 'Are you sure you want to delete this tweet ?' } do %>
-              <%= image_tag 'delete.png', class: :ico %>
+            <%= link_to (@tweet) do %>
+              <%= image_tag 'unlike.png', class: :ico %>
             <% end %>
           </div>
-          <% end %>
         </div>
       </div>
     </div>
+  </div>
+
+  <%= render 'form' %>
+  
+  <% @tweet.replies.each do |reply| %>
+    <%= render partial: "tweet_card", locals: { tweet: reply } %>
   <% end %>
-</section>
