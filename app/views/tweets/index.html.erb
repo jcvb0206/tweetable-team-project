@@ -22,9 +22,13 @@
   <% @tweets.each do |tweet| %>
 
     <div class="card-full">
+
       <div class='card-full__image'>
-        <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>
+      <%= link_to user_path(tweet.user) do %>
+        <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>     
+      <% end %>
       </div>
+
 
       <div class='card-full__body'>
         <div >          
