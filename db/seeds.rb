@@ -26,6 +26,7 @@ u2 = User.create!({:name=>"leo",
 t1 = Tweet.create(body:"haha",user_id: u1.id)
 t2 = Tweet.create(body:"haha2",user_id: u2.id)
 
-
+# rails db:reset -> rails db:seeds
+# sudo service postgresql start
 
 t1.replies << t2

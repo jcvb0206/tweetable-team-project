@@ -20,7 +20,7 @@
   </div>
 
   <% @tweets.each do |tweet| %>
-
+  
     <div class="card-full">
       <div class='card-full__image'>
         <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>

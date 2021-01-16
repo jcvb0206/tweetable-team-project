@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[edit update destroy]
 
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all.select { |tweet| tweet.parent_id == nil }
     @tweet = Tweet.new
   end
 
@@ -24,7 +24,6 @@ class TweetsController < ApplicationController
   #def edit; end
 
   def update
-
     if @tweet.update(tweet_params)
       redirect_to root_path
     else
@@ -33,7 +32,6 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    
     @tweet.destroy
     redirect_to root_path
   end
