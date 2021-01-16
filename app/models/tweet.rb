@@ -5,8 +5,8 @@ class Tweet < ApplicationRecord
 
   belongs_to :parent, class_name: 'Tweet', optional: true
   # has_many :replies, class_name: 'Tweet', foreign_key: 'parent_id', dependent: :destroy
-  has_many :replies, class_name: 'Tweet', 
-                     foreign_key: 'parent_id', 
+  has_many :replies, class_name: 'Tweet',
+                     foreign_key: 'parent_id',
                      dependent: :nullify,
                      inverse_of: false
 

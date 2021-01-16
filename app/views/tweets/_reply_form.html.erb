@@ -1,0 +1,18 @@
+<%= form_with model: @tweet, class: 'card-full', local: true do |form| %>
+  <% if @tweet.errors.any? %>
+  <div>
+    <ul>
+      <% @tweet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="card-full__image">
+    <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png') %>
+  </div>
+  <div class="card-full__body">
+    <%= form.text_field :body, placeholder: 'Remember to thing before write...', class: 'form-input' %>
+    <%= form.submit 'Tweet', class: 'primary-button form-button' %>
+  </div>
+<% end %>

@@ -1,4 +1,3 @@
-
   <div class="title">
     <h1>Tweet Detail</h1>
   </div>
@@ -18,6 +17,7 @@
           <div class="card-icons-left">
             <%= link_to tweet_path(@tweet) do %>
               <%= image_tag 'reply.png', class: :ico %>
+              <span><%= @tweet.replies.count %></span>
             <% end %>
             <%= link_to (@tweet) do %>
               <%= image_tag 'unlike.png', class: :ico %>
@@ -46,6 +46,7 @@
           <div class="card-icons-left">
             <%= link_to tweet_path(tweet) do %>
               <%= image_tag 'reply.png', class: :ico %>
+              <span><%= tweet.replies.count %></span>
             <% end %>
             <%= link_to (tweet) do %>
               <%= image_tag 'unlike.png', class: :ico %>

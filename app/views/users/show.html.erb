@@ -1,0 +1,68 @@
+<h1>Profile</h1>
+
+<section class='content-index'>
+
+  <div class="card-profile">
+    
+    <div class="card-full__image" >
+      <%= image_tag (@user.avatar.attached? ? @user.avatar : 'user.png'), class: :image %>
+    </div>
+    <span ><%= @user.name %></span>
+    <span >@<%= @user.username %></span>
+    <small class='card-release'>Joined on <%= @user.created_at.year %></small>
+
+    <% if current_user && current_user.id == @user.id%>
+    <%= link_to "Edit Profile" ,edit_user_registration_path(current_user) %>
+    <% end %>
+  </div>
+
+  
+
+
+
+  <% @user.tweets.each do |tweet| %>
+
+    <div class="card-full">
+
+      <div class='card-full__image'>
+      <%= link_to user_path(tweet.user) do %>
+        <%= image_tag (tweet.user.avatar.attached? ? tweet.user.avatar : 'user.png') %>     
+      <% end %>
+      </div>
+
+
+      <div class='card-full__body'>
+        <div >          
+          <%= link_to tweet.user.name, tweet_path(tweet), class: "card-name" %>          
+          <span >@<%= tweet.user.username %></span>
+          <small class='card-release'>@<%= tweet.created_at.day.ordinalize %></small>
+        </div>
+          <p ><%= tweet.body %></p>
+        
+        <div  class="card-icons" >
+          <div class="card-icons-left">
+               <%= link_to tweet_path(tweet) do %>
+                <%= image_tag 'reply.png', class: :ico %>
+                <span><%= tweet.replies.count %></span>
+              <% end %>
+              <%= link_to (tweet) do %>
+                <%= image_tag 'unlike.png', class: :ico %>
+              <% end %>
+              
+          </div>
+
+          <% if current_user && current_user.id == tweet.user_id %>
+          <div class="card-icons-right">
+            <%= link_to edit_tweet_path(tweet) do %>
+              <%= image_tag 'edit.png', class: :ico %>
+            <% end %>
+            <%= link_to tweet_path(tweet), method: :delete, data: { confirm: 'Are you sure you want to delete this tweet ?' } do %>
+              <%= image_tag 'delete.png', class: :ico %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>
