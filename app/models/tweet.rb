@@ -20,6 +20,7 @@ class Tweet < ApplicationRecord
   after_destroy :decrement_counter_tweets
 
   def increment_counter_tweets
+    pp "incrementandoooooooooooooooooo"
     self.increment(:tweets_count)
     self.save
   end

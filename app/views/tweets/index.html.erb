@@ -37,7 +37,7 @@
         <div  class="card-icons" >
           <div class="card-icons-left">
                <%= link_to tweet_path(tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %>
+                <%= image_tag 'reply.png', class: :ico %><p><%= tweet.tweets_count %></p>
               <% end %>
               <%= link_to (tweet) do %>
                 <%= image_tag 'unlike.png', class: :ico %>
