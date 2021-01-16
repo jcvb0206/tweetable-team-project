@@ -30,7 +30,7 @@
       <%= image_tag (current_user.avatar.attached? ? current_user.avatar : 'user.png'), class: :image %>
     </div>
     <div class="card-full__body">
-      <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
+      <%= form_with model: @tweet, method: :post, to:'reply_tweets#create', local: true, html: {class: :form_inside} do |f| %>
         <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write... %>
         <div class="card-full__button">
         <%= f.submit "Tweet" %> 
