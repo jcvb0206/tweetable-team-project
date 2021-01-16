@@ -9,7 +9,7 @@
     </div>
     <div class="card-full__body">
       <%= form_with model: @tweet, method: :post, local: true, html: {class: :form_inside} do |f| %>
-        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write %>
+        <%= f.text_area :body, class: :text_area, placeholder: :Remember_to_think_before_write... %>
         <div class="card-full__button">
         <%# <%= f.submit "Tweet",{class: :card_button} %> 
         <%= f.submit "Tweet" %> 
@@ -32,7 +32,7 @@
 
       <div class='card-full__body'>
         <div >          
-          <%= link_to tweet.user.name, tweet_path(tweet), class: "card-name" %>          
+          <span ><%= tweet.user.name.capitalize %></span>         
           <span >@<%= tweet.user.username %></span>
           <small class='card-release'>@<%= tweet.created_at.day.ordinalize %></small>
         </div>
@@ -41,7 +41,8 @@
         <div  class="card-icons" >
           <div class="card-icons-left">
                <%= link_to tweet_path(tweet) do %>
-                <%= image_tag 'reply.png', class: :ico %><p><span><%= tweet.replies.count %></span>
+                <%= image_tag 'reply.png', class: :ico %><p>
+                <span><%= tweet.replies.count %></span>
               <% end %>
               <%= link_to (tweet) do %>
                 <%= image_tag 'unlike.png', class: :ico %>
