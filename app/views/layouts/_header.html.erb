@@ -23,6 +23,12 @@
         <div class="option-box">
           <%= link_to "Log in", new_user_session_path, class: 'secondary-button' %>
         </div>
+        <div class="option-box">
+          <%= link_to "Sign in with Google", omniauth_authorize_path(:user, :google_oauth2), class: 'oauth-button' %>
+        </div>
+        <div class="option-box">
+          <%= link_to "Sign in with Github", omniauth_authorize_path(:user, :github), class: 'oauth-button' %>
+        </div>
       <% end %>
     </nav>
   </div>

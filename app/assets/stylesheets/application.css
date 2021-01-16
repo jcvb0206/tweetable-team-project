@@ -108,6 +108,11 @@
   padding: 4px 16px;
 }
 
+.option-box > .oauth-button{
+  border-radius: 0;
+  color: var(--secondary-text-color);
+}
+
 .home-option::before {
   margin-right: 8px;
   content: url(logo.png);
