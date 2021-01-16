@@ -16,8 +16,6 @@ class Tweet < ApplicationRecord
                      message: 'Description length should be at most 140 characters long'
                    }
 
-  
-
   def user_attached?
     user.avatar.attached?
   end
